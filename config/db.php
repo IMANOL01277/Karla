@@ -4,10 +4,10 @@
 //  Archivo: config/db.php
 // ============================================================
 
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'sk_glamour_nails');
-define('DB_USER', 'root');           // ← cambia por tu usuario
-define('DB_PASS', '');    // ← cambia por tu contraseña
+define('DB_HOST', 'sql109.infinityfree.com');
+define('DB_NAME', 'if0_41790334_sk_glamour_nails');
+define('DB_USER', 'if0_41790334');           // ← cambia por tu usuario
+define('DB_PASS', 'mxot1ZgAYxr');    // ← cambia por tu contraseña
 define('DB_CHAR', 'utf8mb4');
 
 function getDB(): PDO {

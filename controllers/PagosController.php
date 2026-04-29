@@ -20,10 +20,19 @@ class PagosController {
     }
 
     private static function listar(): void {
-        $pdo  = getDB();
-        $stmt = $pdo->query("SELECT * FROM v_pagos ORDER BY creado_en DESC");
-        ok($stmt->fetchAll());
-    }
+    $pdo  = getDB();
+    $stmt = $pdo->query("
+        SELECT p.id, cl.nombre AS cliente, l.nombre AS lugar,
+               p.monto, p.metodo_pago, p.notas, p.creado_en,
+               u.nombre AS registrado_por
+        FROM pagos p
+        JOIN clientes cl ON p.cliente_id = cl.id
+        JOIN lugares l ON p.lugar_id = l.id
+        JOIN usuarios u ON p.registrado_por = u.id
+        ORDER BY p.creado_en DESC
+    ");
+    ok($stmt->fetchAll());
+}
 
     private static function crear(): void {
         $data          = body();

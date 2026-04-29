@@ -25,13 +25,19 @@ class CitasController {
     }
 
     private static function listar(): void {
-        $pdo  = getDB();
-        $stmt = $pdo->query("
-            SELECT * FROM v_citas
-            ORDER BY fecha DESC, hora DESC
-        ");
-        ok($stmt->fetchAll());
-    }
+    $pdo  = getDB();
+    $stmt = $pdo->query("
+        SELECT c.id, cl.nombre AS cliente, s.nombre AS servicio,
+               l.nombre AS lugar, c.fecha, c.hora, c.estado, c.notas
+        FROM citas c
+        JOIN clientes cl ON c.cliente_id = cl.id
+        JOIN servicios s ON c.servicio_id = s.id
+        JOIN lugares l ON c.lugar_id = l.id
+        ORDER BY c.fecha DESC, c.hora DESC
+    ");
+    ok($stmt->fetchAll());
+}
+
 
     private static function crear(): void {
         $data = body();
